@@ -47,6 +47,8 @@ const refreshNewQueue: Array<{
 }> = [];
 const refreshReceiverQueue: string[] = [];
 const refreshNextQueue: SessionResult[] = [];
+const tweakAddQueue: string[] = [];
+const tweakMulQueue: string[] = [];
 let versionValue = "0.0.0-test";
 
 function bytes(data: Uint8Array | number[]): Uint8Array {
@@ -85,6 +87,14 @@ function nextQueued<T>(queue: T[], name: string): T {
 		throw new Error(`missing mock result for ${name}`);
 	}
 	return value;
+}
+
+function registerTweakedHandle(parentHandle: string, handle: string): void {
+	const parent = handles.get(parentHandle);
+	if (!parent) {
+		throw new Error(`unknown handle ${parentHandle}`);
+	}
+	handles.set(handle, { ...parent });
 }
 
 const NativeLibtss = {
@@ -200,6 +210,16 @@ const NativeLibtss = {
 			return handle;
 		},
 	),
+	tweakAdd: jest.fn(async (keyShareHandle: string, _tweak: string) => {
+		const handle = nextQueued(tweakAddQueue, "tweakAdd");
+		registerTweakedHandle(keyShareHandle, handle);
+		return handle;
+	}),
+	tweakMul: jest.fn(async (keyShareHandle: string, _factor: string) => {
+		const handle = nextQueued(tweakMulQueue, "tweakMul");
+		registerTweakedHandle(keyShareHandle, handle);
+		return handle;
+	}),
 };
 
 export const __mock = {
@@ -252,6 +272,8 @@ export const __mock = {
 		refreshNewQueue.length = 0;
 		refreshReceiverQueue.length = 0;
 		refreshNextQueue.length = 0;
+		tweakAddQueue.length = 0;
+		tweakMulQueue.length = 0;
 		versionValue = "0.0.0-test";
 
 		for (const fn of Object.values(NativeLibtss)) {
@@ -260,6 +282,12 @@ export const __mock = {
 	},
 	setVersion(value: string): void {
 		versionValue = value;
+	},
+	pushTweakAdd(handle: string): void {
+		tweakAddQueue.push(handle);
+	},
+	pushTweakMul(handle: string): void {
+		tweakMulQueue.push(handle);
 	},
 };
 

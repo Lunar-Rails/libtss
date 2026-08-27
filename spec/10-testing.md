@@ -73,6 +73,9 @@ cd libtss-ffi && cargo test --test integration
 | `TestDeriveChild` | BIP-32 child derivation produces correct public key |
 | `TestDerivePath` | Multi-level path derivation matches reference |
 | `TestDeriveChild_AllParties` | All parties derive same child public key independently |
+| `TestTweakAdd_SignsUnderTweakedKey` | Additively tweaked DKLs23 shares sign; signature verifies under `pk + t·G` only |
+| `TestTweakMul_ByOneIsIdentity` | Multiplicative tweak by one leaves the group key unchanged; zero factor rejected |
+| `TestTweak_UnsupportedSuite` | `tweak_add` / `tweak_mul` on a non-DKLs23 suite return `ProtocolMismatch` |
 | `TestRefresh_FROST` | Share refresh preserves signing ability |
 | `TestRefresh_DKLs` | Complete and quick refresh preserve signing |
 | `TestRefresh_OldSharesInvalid` | Old shares cannot produce valid signatures after refresh |
