@@ -621,7 +621,7 @@ dependencies = [
 [[package]]
 name = "dkls23-core"
 version = "0.4.1"
-source = "git+https://github.com/0xCarbon/DKLs23?branch=main#d4af63103085f6c1341890b75500825f535ecd6c"
+source = "git+https://github.com/0xCarbon/DKLs23?tag=v0.4.1#d4af63103085f6c1341890b75500825f535ecd6c"
 dependencies = [
  "bincode",
  "elliptic-curve 0.14.0-rc.29",
@@ -643,7 +643,7 @@ dependencies = [
 [[package]]
 name = "dkls23-secp256k1"
 version = "0.4.2"
-source = "git+https://github.com/0xCarbon/DKLs23?branch=main#d4af63103085f6c1341890b75500825f535ecd6c"
+source = "git+https://github.com/0xCarbon/DKLs23?tag=v0.4.1#d4af63103085f6c1341890b75500825f535ecd6c"
 dependencies = [
  "bech32",
  "bs58",
@@ -661,7 +661,7 @@ dependencies = [
 [[package]]
 name = "dkls23-secp256r1"
 version = "0.4.1"
-source = "git+https://github.com/0xCarbon/DKLs23?branch=main#d4af63103085f6c1341890b75500825f535ecd6c"
+source = "git+https://github.com/0xCarbon/DKLs23?tag=v0.4.1#d4af63103085f6c1341890b75500825f535ecd6c"
 dependencies = [
  "blake2",
  "bs58",
