@@ -10,6 +10,7 @@ pub mod memory;
 pub mod messages;
 pub mod registry;
 pub mod session;
+pub mod tweak;
 pub mod types;
 
 #[macro_export]
